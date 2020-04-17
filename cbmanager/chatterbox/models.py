@@ -1,9 +1,7 @@
 from django.db import models
 from model_utils.models import TimeStampedModel
-import datetime
-from django.utils.timezone import make_aware
+import datetime as dt
 from django.db.models import Case, When, Value, F, ExpressionWrapper
-from django.db.models.functions import TruncDate
 
 class Organisation(TimeStampedModel):
   objects = models.Manager()
@@ -42,15 +40,15 @@ class EnrollmentCustomQuerySet(models.QuerySet):
     return self.filter(student__organisation__id=organisation).filter(is_active=True)
 
 class EnrollmentManager(models.Manager.from_queryset(EnrollmentCustomQuerySet)):
-  COURSE_DURATION = datetime.timedelta(days=182)
+  COURSE_DURATION = dt.timedelta(days=183) # allow one extra day beyond 26 weeks
 
   def get_queryset(self):
       """Overrides the models.Manager method"""
-      current_lookback = make_aware(datetime.datetime.today() - self.COURSE_DURATION)
-      active_lookback = make_aware(datetime.datetime.today() - datetime.timedelta(days=30))
+      current_lookback = dt.datetime.today() - self.COURSE_DURATION
+      active_lookback = dt.datetime.today() - dt.timedelta(days=30)
       qs = super(EnrollmentManager, self).get_queryset().annotate(
         end_date=ExpressionWrapper(
-            TruncDate(F('enrolled')) + self.COURSE_DURATION,
+            F('enrolled') + dt.timedelta(days=182),
             output_field=models.DateField(),
         ),
         is_current=Case(
