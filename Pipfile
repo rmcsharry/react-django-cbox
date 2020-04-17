@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+
+[packages]
+requests = "*"
+django = "*"
+djangorestframework = "*"
+django-rest-knox = "*"
+django-model-utils = "*"
+
+[requires]
+python_version = "3.7"
