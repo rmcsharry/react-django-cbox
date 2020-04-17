@@ -1,6 +1,6 @@
 import csv
 import logging
-from datetime import datetime
+from datetime import datetime as DateTime
 from django.utils.timezone import make_aware
 from django.core.management.base import BaseCommand
 from chatterbox.models import Organisation, Course, Student, Enrollment
@@ -27,8 +27,8 @@ class Command(BaseCommand):
         logger.info(f'Importing students for Organisation: {org[0].name}')
         counter = 0
         for row in csv_reader:
-          enrolled = datetime.strptime(row[4], '%Y-%m-%d')
-          last_booking = datetime.strptime(row[5], '%Y-%m-%d')
+          enrolled = DateTime.strptime(row[4], '%Y-%m-%d')
+          last_booking = DateTime.strptime(row[5], '%Y-%m-%d')
           course = Course.objects.filter(language=row[8],level=row[9])[0]
 
           # we just assume this will work since we are in charge of the data!
@@ -42,8 +42,8 @@ class Command(BaseCommand):
           Enrollment.objects.create(
             course=course,
             student=new_student,
-            enrolled=datetime.strptime(row[4], '%Y-%m-%d'),
-            last_booking=datetime.strptime(row[5], '%Y-%m-%d'),
+            enrolled=DateTime.strptime(row[4], '%Y-%m-%d'),
+            last_booking=DateTime.strptime(row[5], '%Y-%m-%d'),
             credits_total=row[6],
             credits_balance=row[7],
             )
