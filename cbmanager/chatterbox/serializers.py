@@ -24,7 +24,7 @@ class EnrollmentSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = Enrollment
-    fields = ('id', 'student', 'course', 'enrolled', 'end_date', 'is_current', 'last_booking', 'is_active', 'credits_balance')
+    fields = ('id', 'enrolled', 'student', 'course', 'end_date', 'is_current', 'last_booking', 'is_active', 'credits_balance')
 
   def get_end_date(self, obj):
     return obj.end_date

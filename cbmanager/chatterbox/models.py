@@ -10,6 +10,9 @@ class Organisation(TimeStampedModel):
   def __str__(self):
     return self.name
 
+  class Meta:
+    ordering = ('name',)
+      
 class Student(TimeStampedModel):
   objects = models.Manager()
   first_name = models.CharField(max_length=50)
@@ -19,6 +22,9 @@ class Student(TimeStampedModel):
 
   def __str__(self):
     return self.email
+
+  class Meta:
+      ordering = ('last_name','first_name')
 
 class Course(TimeStampedModel):
   objects = models.Manager()
@@ -30,6 +36,7 @@ class Course(TimeStampedModel):
 
   class Meta:
     unique_together = ('language', 'level')
+    ordering = ('language','level')
 
 class EnrollmentCustomQuerySet(models.QuerySet):
   def org_students_current(self, organisation):
@@ -79,6 +86,9 @@ class Enrollment(TimeStampedModel):
   credits_total = models.SmallIntegerField(default=10)
   credits_balance = models.DecimalField(max_digits=5, decimal_places=2)
 
+  class Meta:
+    ordering = ('enrolled',)
+
 class Progress(TimeStampedModel):
   objects = models.Manager()
   organisation = models.ForeignKey(to=Organisation, on_delete=models.DO_NOTHING, default=None, null=False)
@@ -87,6 +97,7 @@ class Progress(TimeStampedModel):
   on_track = models.IntegerField(default=0, null=False)
   slow = models.IntegerField(default=0, null=False)
   inactive = models.IntegerField(default=0, null=False)
+  lapsed = models.IntegerField(default=0, null=False)
 
   # Protects against running expensive calcualtions more than once a day
   # (forces you to explicitly delete the existing data for a given calcualted_date)
