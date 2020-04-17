@@ -1,0 +1,66 @@
+[
+  {
+    "model": "chatterbox.course",
+    "pk": 1,
+    "fields": {
+      "language": "French",
+      "level": "A1"
+    }
+  },
+  {
+    "model": "chatterbox.course",
+    "pk": 2,
+    "fields": {
+      "language": "French",
+      "level": "A2"
+    }
+  },
+  {
+    "model": "chatterbox.course",
+    "pk": 3,
+    "fields": {
+      "language": "French",
+      "level": "B1"
+    }
+  },
+  {
+    "model": "chatterbox.course",
+    "pk": 4,
+    "fields": {
+      "language": "French",
+      "level": "B2"
+    }
+  },
+  {
+    "model": "chatterbox.course",
+    "pk": 5,
+    "fields": {
+      "language": "Arabic",
+      "level": "A1"
+    }
+  },
+  {
+    "model": "chatterbox.course",
+    "pk": 6,
+    "fields": {
+      "language": "Arabic",
+      "level": "A2"
+    }
+  },
+  {
+    "model": "chatterbox.course",
+    "pk": 7,
+    "fields": {
+      "language": "Arabic",
+      "level": "B1"
+    }
+  },
+  {
+    "model": "chatterbox.course",
+    "pk": 8,
+    "fields": {
+      "language": "Arabic",
+      "level": "B2"
+    }
+  }
+]

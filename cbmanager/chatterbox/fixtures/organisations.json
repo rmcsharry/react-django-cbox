@@ -1,0 +1,16 @@
+[
+  {
+    "model": "chatterbox.organisation",
+    "pk": 1,
+    "fields": {
+      "name": "AEKI"
+    }
+  },
+  {
+    "model": "chatterbox.organisation",
+    "pk": 2,
+    "fields": {
+      "name": "ACME"
+    }
+  }
+]
