@@ -26,8 +26,6 @@ class EnrollmentSerializer(serializers.ModelSerializer):
     model = Enrollment
     fields = ('id', 'student', 'course', 'enrolled', 'end_date', 'is_current', 'last_booking', 'is_active', 'credits_balance')
 
-  # allow 1 extra day beyond 26 weeks for calculating when an enrollment ends
-  # (because midnight is actually the start of a new day, not the end)
   def get_end_date(self, obj):
     return obj.end_date
 

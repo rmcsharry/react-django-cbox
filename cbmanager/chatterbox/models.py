@@ -1,6 +1,6 @@
 from django.db import models
 from model_utils.models import TimeStampedModel
-import datetime as dt
+from datetime import datetime as DateTime, timedelta as TimeDelta, date as Date
 from django.db.models import Case, When, Value, F, ExpressionWrapper
 
 class Organisation(TimeStampedModel):
@@ -38,15 +38,18 @@ class EnrollmentCustomQuerySet(models.QuerySet):
     return self.filter(student__organisation__id=organisation).filter(is_active=True)
 
 class EnrollmentManager(models.Manager.from_queryset(EnrollmentCustomQuerySet)):
-  COURSE_DURATION = dt.timedelta(days=183) # allow one extra day beyond 26 weeks
+  # allow 1 extra day beyond 26 weeks for calculating when an enrollment ends
+  # because midnight is actually the start of a new day, not the end
+  # (and also because of leap years!)
+  COURSE_DURATION = TimeDelta(days=183)
 
   def get_queryset(self):
       """Overrides the models.Manager method"""
-      current_lookback = dt.datetime.today() - self.COURSE_DURATION
-      active_lookback = dt.datetime.today() - dt.timedelta(days=30)
+      current_lookback = DateTime.today() - self.COURSE_DURATION
+      active_lookback = DateTime.today() - TimeDelta(days=30)
       qs = super(EnrollmentManager, self).get_queryset().annotate(
         end_date=ExpressionWrapper(
-            F('enrolled') + dt.timedelta(days=182),
+            F('enrolled') + TimeDelta(days=182),
             output_field=models.DateField(),
         ),
         is_current=Case(
@@ -75,3 +78,17 @@ class Enrollment(TimeStampedModel):
   last_booking = models.DateField()
   credits_total = models.SmallIntegerField(default=10)
   credits_balance = models.DecimalField(max_digits=5, decimal_places=2)
+
+class Progress(TimeStampedModel):
+  objects = models.Manager()
+  organisation = models.ForeignKey(to=Organisation, on_delete=models.DO_NOTHING, default=None, null=False)
+  course = models.ForeignKey(to=Course, on_delete=models.DO_NOTHING, default=None, null=False)
+  calculated_date = models.DateField(default=Date.today)
+  on_track = models.IntegerField(default=0, null=False)
+  slow = models.IntegerField(default=0, null=False)
+  inactive = models.IntegerField(default=0, null=False)
+
+  # Protects against running expensive calcualtions more than once a day
+  # (forces you to explicitly delete the existing data for a given calcualted_date)
+  class Meta:
+    unique_together = ('calculated_date', 'organisation', 'course')
