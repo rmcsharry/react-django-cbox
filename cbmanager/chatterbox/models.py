@@ -33,10 +33,8 @@ class Course(TimeStampedModel):
 
 class EnrollmentCustomQuerySet(models.QuerySet):
   def org_students_current(self, organisation):
-    # lookback = make_aware(datetime.datetime.today() - datetime.timedelta(days=183))
     return self.filter(student__organisation__id=organisation).filter(is_current=True)
   def org_students_active(self, organisation):
-    # lookback = make_aware(datetime.datetime.today() - datetime.timedelta(days=30))
     return self.filter(student__organisation__id=organisation).filter(is_active=True)
 
 class EnrollmentManager(models.Manager.from_queryset(EnrollmentCustomQuerySet)):
