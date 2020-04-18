@@ -39,10 +39,11 @@ class Course(TimeStampedModel):
     ordering = ('language','level')
 
 class EnrollmentCustomQuerySet(models.QuerySet):
+  # These are somewhat superfluous, but kind of useful wrappers/helpful methods
   def org_students_current(self, organisation):
     return self.filter(student__organisation__id=organisation).filter(is_current=True)
-  def org_students_active(self, organisation):
-    return self.filter(student__organisation__id=organisation).filter(is_active=True)
+  def org_students_lapsed(self, organisation):
+    return self.filter(student__organisation__id=organisation).filter(is_current=False)
 
 class EnrollmentManager(models.Manager.from_queryset(EnrollmentCustomQuerySet)):
   # allow 1 extra day beyond 26 weeks for calculating when an enrollment ends

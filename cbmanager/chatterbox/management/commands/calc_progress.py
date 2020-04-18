@@ -39,11 +39,17 @@ class Command(BaseCommand):
 
     def handle(self, **options):
       org_id = 1
+      # Delete any data from today's previous runs
       Progress.objects.filter(organisation_id=org_id, calculated_date=Date.today()).delete()
-      logger = logging.getLogger('commands') #from LOGGING.loggers in settings.py
+      logger = logging.getLogger('commands')  #from LOGGING.loggers in settings.py
       
+      # Get the different enrollment status types
+      current = Enrollment.objects.org_students_current(org_id)
+      lapsed = Enrollment.objects.org_students_lapsed(org_id)
+      active = current.filter(is_active=True)
+      inactive = current.filter(is_active=False)
+
       # Process current enrollments that are ACTIVE
-      active = Enrollment.objects.org_students_current(org_id).filter(is_active=True)
       on_track = 0
       slow = 0
       logger.info(f'Calculating progress for AEKI - {active.count()} current & active students')
@@ -62,12 +68,10 @@ class Command(BaseCommand):
           self.store_active(enrollment.course, 0, 1)
       
       # Process current enrollments that are INACTIVE
-      inactive = Enrollment.objects.org_students_current(org_id).filter(is_active=False)
       for enrollment in inactive:
         self.store_inactive(enrollment.course)
 
       # Process students whose enrollments have LAPSED
-      lapsed = Enrollment.objects.filter(student__organisation_id=org_id, is_current=False)
       for enrollment in lapsed:
         self.store_lapsed(enrollment.course)
 
