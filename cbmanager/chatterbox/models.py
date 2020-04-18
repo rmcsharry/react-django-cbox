@@ -95,7 +95,7 @@ class Progress(TimeStampedModel):
   organisation = models.ForeignKey(to=Organisation, on_delete=models.DO_NOTHING, default=None, null=False)
   course = models.ForeignKey(to=Course, on_delete=models.DO_NOTHING, default=None, null=False)
   calculated_date = models.DateField(default=Date.today)
-  on_track = models.IntegerField(default=0, null=False)
+  ontrack = models.IntegerField(default=0, null=False)
   slow = models.IntegerField(default=0, null=False)
   inactive = models.IntegerField(default=0, null=False)
   lapsed = models.IntegerField(default=0, null=False)
