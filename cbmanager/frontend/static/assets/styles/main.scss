@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/functions"; 
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+@import "./variables.scss";
+
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+}
