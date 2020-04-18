@@ -12,9 +12,19 @@ class Organisation(TimeStampedModel):
 
   class Meta:
     ordering = ('name',)
-      
+
+class StudentManager(models.Manager):
+  # def org_courses_enrolled(self, organisation):
+  #   return self.get_queryset().filter(enrollment__student__organisation_id=organisation).all()
+
+  def get_queryset(self):
+     return super(StudentManager, self).get_queryset()
+
+  def get_courses(self, organisation):
+    return self.get_queryset().filter(enrollments__student__organisation_id=organisation)
+
 class Student(TimeStampedModel):
-  objects = models.Manager()
+  objects = StudentManager()
   first_name = models.CharField(max_length=50)
   last_name = models.CharField(max_length=50)
   email = models.EmailField(unique=True)
@@ -26,8 +36,15 @@ class Student(TimeStampedModel):
   class Meta:
       ordering = ('last_name','first_name')
 
+class CourseManager(models.Manager):
+  def get_queryset(self):
+     return super(CourseManager, self).get_queryset()
+
+  def get_courses(self, organisation):
+    return self.get_queryset().filter(courses__student__organisation_id=organisation).distinct()
+
 class Course(TimeStampedModel):
-  objects = models.Manager()
+  objects = CourseManager()
   language = models.CharField(max_length=30)
   level = models.CharField(max_length=2)
 
