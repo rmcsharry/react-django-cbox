@@ -37,7 +37,7 @@ class EnrollmentSerializer(serializers.ModelSerializer):
 
 class StudentSerializer(serializers.ModelSerializer):
   enrollments = EnrollmentSerializer(many=True, read_only=True)
-  organisation = serializers.HyperlinkedRelatedField(many=False, read_only=True, view_name='organisation-detail')
+  # organisation = serializers.HyperlinkedRelatedField(many=False, read_only=True, view_name='organisation-detail')
   class Meta:
     model = Student
     fields = ('id', 'first_name', 'last_name', 'email', 'organisation', 'enrollments')

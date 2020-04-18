@@ -12,11 +12,18 @@ class ActiveEnrollmentsView(mixins.ListModelMixin, mixins.RetrieveModelMixin, vi
   serializer_class = EnrollmentSerializer
   queryset = Enrollment.objects.filter(is_active=True)
 
-# TODO: learn how the following can be used to filter out only those students for a given organisation
 class OrganisationEnrolledStudentsView(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
   serializer_class = StudentSerializer
-  queryset = Student.objects.all()
+
+  def get_queryset(self):
+    org_id = self.kwargs['organisation_pk']
+    qs = Student.objects.get_enrolled_students(org_id)
+    return qs
 
 class OrganisationEnrolledCoursesView(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
   serializer_class = CourseSerializer
-  queryset = Course.objects.get_courses(1)
+
+  def get_queryset(self):
+    org_id = self.kwargs['organisation_pk']
+    qs = Course.objects.get_enrolled_courses(1)
+    return qs
