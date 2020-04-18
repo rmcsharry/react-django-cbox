@@ -53,7 +53,7 @@ class EnrollmentManager(models.Manager.from_queryset(EnrollmentCustomQuerySet)):
   def get_queryset(self):
       """Overrides the models.Manager method"""
       current_lookback = DateTime.today() - self.COURSE_DURATION
-      active_lookback = DateTime.today() - TimeDelta(days=30)
+      active_lookback = DateTime.today() - TimeDelta(days=45)
       qs = super(EnrollmentManager, self).get_queryset().annotate(
         end_date=ExpressionWrapper(
             F('enrolled') + TimeDelta(days=182),

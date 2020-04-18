@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Organisation, Course, Student, Enrollment
+from .models import Organisation, Course, Student, Enrollment, Progress
 import datetime
 from django.utils.timezone import make_aware
 
@@ -41,3 +41,8 @@ class StudentSerializer(serializers.ModelSerializer):
   class Meta:
     model = Student
     fields = ('id', 'first_name', 'last_name', 'email', 'organisation', 'enrollments')
+
+class ProgressSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Progress
+    fields = '__all__'

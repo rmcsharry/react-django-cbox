@@ -1,6 +1,6 @@
-from .models import Organisation, Course, Student, Enrollment
+from .models import Organisation, Course, Student, Enrollment, Progress
 from rest_framework import viewsets, permissions
-from .serializers import OrganisationSerializer, CourseSerializer, StudentSerializer, EnrollmentSerializer
+from .serializers import OrganisationSerializer, CourseSerializer, StudentSerializer, EnrollmentSerializer, ProgressSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -32,6 +32,14 @@ class StudentViewSet(viewsets.ModelViewSet):
 class EnrollmentViewSet(viewsets.ModelViewSet):
   queryset = Enrollment.objects.all()
   serializer_class = EnrollmentSerializer
+  permission_classes = [
+    permissions.AllowAny
+  ]
+
+# Progress Viewset
+class ProgressViewSet(viewsets.ModelViewSet):
+  queryset = Progress.objects.all()
+  serializer_class = ProgressSerializer
   permission_classes = [
     permissions.AllowAny
   ]
