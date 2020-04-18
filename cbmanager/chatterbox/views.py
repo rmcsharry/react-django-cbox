@@ -25,5 +25,5 @@ class OrganisationEnrolledCoursesView(mixins.ListModelMixin, mixins.RetrieveMode
 
   def get_queryset(self):
     org_id = self.kwargs['organisation_pk']
-    qs = Course.objects.get_enrolled_courses(1)
+    qs = Course.objects.get_enrolled_courses(org_id)
     return qs
