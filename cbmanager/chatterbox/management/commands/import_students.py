@@ -8,7 +8,7 @@ from chatterbox.models import Organisation, Course, Student, Enrollment
 """
 Script to import student data in csv format
 """
-# TODO: add proper logging and error checks and parameterise for different organisations
+# TODO: error checks and logging to file
 
 class Command(BaseCommand):
     def handle(self, **options):

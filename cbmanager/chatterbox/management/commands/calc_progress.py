@@ -9,6 +9,8 @@ from chatterbox.models import Organisation, Course, Student, Enrollment, Progres
 from chatterbox.views import ActiveEnrollmentsView
 from chatterbox.api import EnrollmentSerializer
 
+# TODO: error checks and logging to file
+
 class Command(BaseCommand):
     help="Calculates, as of today, the progress for all students of a given organisation"
 
