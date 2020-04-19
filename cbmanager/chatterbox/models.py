@@ -119,3 +119,4 @@ class Progress(TimeStampedModel):
   # (forces you to explicitly delete the existing data for a given calcualted_date)
   class Meta:
     unique_together = ('calculated_date', 'organisation', 'course')
+    ordering = ('id',)

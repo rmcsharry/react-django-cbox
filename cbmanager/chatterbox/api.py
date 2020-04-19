@@ -3,6 +3,7 @@ from rest_framework import viewsets, permissions
 from .serializers import OrganisationSerializer, CourseSerializer, StudentSerializer, EnrollmentSerializer, ProgressSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from datetime import date as Date
 
 # Organisation Viewset
 class OrganisationViewSet(viewsets.ModelViewSet):
@@ -38,7 +39,7 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
 
 # Progress Viewset
 class ProgressViewSet(viewsets.ModelViewSet):
-  queryset = Progress.objects.all()
+  queryset = Progress.objects.filter(calculated_date=Date.today())
   serializer_class = ProgressSerializer
   permission_classes = [
     permissions.AllowAny
