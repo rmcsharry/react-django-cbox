@@ -3,16 +3,14 @@ import Header from '../Header'
 import Container from 'react-bootstrap/Container'
 import Footer from '../Footer'
 
-function Layout({children}) {
+function Layout({ children }) {
   return (
     <>
       <Header />
-      <Container>
-        {children}
-      </Container>
+      <Container>{children}</Container>
       <Footer />
     </>
-  );
+  )
 }
 
-export default Layout;
+export default Layout

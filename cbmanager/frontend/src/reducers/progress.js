@@ -1,8 +1,8 @@
-import { GET_PROGRESS } from '../actions/types.js';
+import { GET_PROGRESS } from '../actions/types.js'
 
 const initialState = {
   progress: {},
-  organisation: {} // TODO: provide different dashboards per organisation so this will store which is the 'current' one
+  organisation: {}, // TODO: provide different dashboards per organisation so this will store which is the 'current' one
 }
 
 export default function (state = initialState, action) {
@@ -10,7 +10,7 @@ export default function (state = initialState, action) {
     case GET_PROGRESS:
       return {
         ...state,
-        progress: action.payload
+        progress: action.payload,
       }
     default:
       return state

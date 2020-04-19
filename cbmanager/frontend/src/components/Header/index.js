@@ -1,6 +1,6 @@
-import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
+import React from 'react'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
 export default function Header() {
   return (
@@ -33,5 +33,5 @@ export default function Header() {
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-  );
+  )
 }

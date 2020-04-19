@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from 'axios'
 
-import { GET_PROGRESS } from './types';
+import { GET_PROGRESS } from './types'
 
 // GET PROGRESS action
 export const getProgress = () => (dispatch) => {
@@ -10,7 +10,7 @@ export const getProgress = () => (dispatch) => {
       dispatch({
         type: GET_PROGRESS,
         payload: res.data,
-      });
+      })
     })
-    .catch((err) => console.log(err));
-};
+    .catch((err) => console.log(err))
+}
