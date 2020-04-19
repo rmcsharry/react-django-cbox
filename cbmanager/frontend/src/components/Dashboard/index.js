@@ -11,6 +11,7 @@ import { People } from 'react-bootstrap-icons'
 import { Book } from 'react-bootstrap-icons'
 import { Award } from 'react-bootstrap-icons'
 import styles from './styles.scss'
+import SectionTitle from '../SectionTitle'
 
 export class Dashboard extends Component {
   static propTypes = {
@@ -27,7 +28,6 @@ export class Dashboard extends Component {
     return (
       <div className={styles.wrapper}>
         <Row className="justify-content-center">
-          
           <div className={styles.titleContainer}>
             <img
               src='/static/legologo.jpeg'
@@ -38,8 +38,8 @@ export class Dashboard extends Component {
             />
               <h2 className={styles.title}>AEKI Dashboard</h2>
           </div>
-          
         </Row>
+        <SectionTitle title={'Summary'} />
         <Row xs={1} sm={3}>
           <Col>
             <SummaryCard
@@ -59,6 +59,8 @@ export class Dashboard extends Component {
             <SummaryCard title='Certified' value='0' icon={<Award />} />
           </Col>
         </Row>
+        <SectionTitle title={'Progress'} />
+        <SectionTitle title={`${this.props.totalResults} student(s)`} />
       </div>
     )
   }

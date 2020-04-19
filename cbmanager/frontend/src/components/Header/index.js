@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav'
 
 export default function Header() {
   return (
-    <Navbar bg='light' expand='lg'>
+    <Navbar className='navbar-dark bg-dark' expand='lg'>
       <Navbar.Brand href='#home'>
         <img
           src='/static/dashboard-logo.png'
