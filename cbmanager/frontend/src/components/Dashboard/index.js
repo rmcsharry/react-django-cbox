@@ -26,6 +26,20 @@ export class Dashboard extends Component {
   render() {
     return (
       <div className={styles.wrapper}>
+        <Row className="justify-content-center">
+          
+          <div className={styles.titleContainer}>
+            <img
+              src='/static/legologo.jpeg'
+              width='30'
+              height='30'
+              className='d-inline-block align-middle'
+              alt='Dashboard Logo'
+            />
+              <h2 className={styles.title}>AEKI Dashboard</h2>
+          </div>
+          
+        </Row>
         <Row xs={1} sm={3}>
           <Col>
             <SummaryCard

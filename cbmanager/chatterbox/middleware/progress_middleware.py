@@ -10,10 +10,11 @@ def RunProgress(get_response):
     # NOTE This is just a hack to ensure there is always progress data for today
     # but also to show that I understand how to hook into the Djanog middleware
     isProgress = 'progress' in request.get_full_path()
-    if (isProgress):
-      progress = Progress.objects.filter(organisation_id=1, calculated_date__gte=Date.today()).first()
-      if progress:
-        call_command('calc_progress', '1')
+    if isProgress:
+      org_id = 1
+      progress = Progress.objects.filter(organisation_id=org_id, calculated_date=Date.today()).first()
+      if progress is None:
+        call_command('calc_progress', org_id)
 
     response = get_response(request)
 
