@@ -1,0 +1,30 @@
+@import "~bootstrap/scss/functions"; 
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import '../../../static/assets/styles/variables';
+
+.wrapper {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: white;
+  box-shadow: $card-shadow;
+  border-radius: 4px;
+  & h1 {
+    font-size: 1.5rem;
+  }
+  & h3 {
+    font-size: 1rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .wrapper {
+    padding: 2rem;
+    & h1 {
+      font-size: 2rem;
+    }
+    & h3 {
+      font-size: 1.8rem;
+    }
+  }
+}
