@@ -113,6 +113,7 @@ class Progress(TimeStampedModel):
   slow = models.IntegerField(default=0, null=False)
   inactive = models.IntegerField(default=0, null=False)
   lapsed = models.IntegerField(default=0, null=False)
+  total = models.IntegerField(default=0, null=False)
 
   # Protects against running expensive calcualtions more than once a day
   # (forces you to explicitly delete the existing data for a given calcualted_date)

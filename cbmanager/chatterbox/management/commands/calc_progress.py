@@ -48,11 +48,13 @@ class Command(BaseCommand):
       progress, _ = Progress.objects.get_or_create(
         organisation_id=self.org_id,
         course=self.course,
+        calculated_date=Date.today()
       )
       progress.ontrack += ontrack
       progress.slow += slow
       progress.inactive += inactive
       progress.lapsed += lapsed
+      progress.total += 1
       progress.save()
       return progress
 
@@ -69,7 +71,7 @@ class Command(BaseCommand):
       lapsed = Enrollment.objects.org_students_lapsed(self.org_id)
       active = current.filter(is_active=True)
       inactive = current.filter(is_active=False)
-      self.logger.info(f'Calculating progress for organisation {self.org_id} - {current.count()} current & {lapsed.count()} students')
+      self.logger.info(f'Calculating progress for organisation {self.org_id}')
 
       # Process current enrollments that are ACTIVE
       self.process_active(active)
@@ -86,10 +88,14 @@ class Command(BaseCommand):
 
       progress = Progress.objects.filter(organisation_id=self.org_id, calculated_date=Date.today()).aggregate(sum_ontrack = Sum('ontrack'), sum_slow=Sum('slow'))
       self.logger.info(f"{DateTime.now()}: *** CALC PROGRESS SUMMARY ***")
+      self.logger.info(f"{DateTime.now()}: --- Organisation ID={self.org_id} ---")
       self.logger.info(f'{DateTime.now()}: ON TRACK: {progress["sum_ontrack"]}')
       self.logger.info(f'{DateTime.now()}: SLOW: {progress["sum_slow"]}')
       self.logger.info(f'{DateTime.now()}: INACTIVE: {inactive.count()}')
       self.logger.info(f'{DateTime.now()}: LAPSED: {lapsed.count()}')
-      self.logger.info(f"{DateTime.now()}: *** CALC PROGRESS SUMMARY ***")
+      self.logger.info(f'{DateTime.now()}: =======================================')
+      self.logger.info(f'{DateTime.now()}: TOTAL: {current.count()} current & {lapsed.count()} lapsed students')
+      self.logger.info(f'{DateTime.now()}: =======================================')
+      self.logger.info(f"{DateTime.now()}: *** END ***")
 
       return "\033[01;34mDONE"
