@@ -10,12 +10,12 @@ function SummaryCard({title, value, icon}) {
         <Col>
           <h1>{value}</h1>
         </Col>
+        <Col><div className={styles.icon}>{icon}</div></Col>
       </Row>
       <Row>
         <Col>
           <h3>{title}</h3>
         </Col>
-        <Col>{icon}</Col>
       </Row>
     </div>
   );

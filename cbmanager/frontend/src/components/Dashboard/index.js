@@ -10,7 +10,7 @@ import { Award } from 'react-bootstrap-icons';
 function Dashboard() {
   return (
     <div className={styles.wrapper}>
-      <Row>
+      <Row xs={1} sm={3}>
         <Col>
           <SummaryCard title='Students' value='100' icon={<People />} />
         </Col>

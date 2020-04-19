@@ -17,14 +17,25 @@
   }
 }
 
+.icon {
+  font-size: 2rem;
+  & svg {
+    vertical-align: top;
+    float: right;
+  }
+}
+
 @include media-breakpoint-up(lg) {
   .wrapper {
     padding: 2rem;
     & h1 {
-      font-size: 2rem;
+      font-size: 2.1rem;
     }
     & h3 {
       font-size: 1.8rem;
     }
+  }
+  .icon {
+    font-size: 2.5rem;
   }
 }

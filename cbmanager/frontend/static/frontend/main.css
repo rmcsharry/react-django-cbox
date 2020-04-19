@@ -25,13 +25,21 @@ footer {
   .styles__wrapper___cu1W7 h3 {
     font-size: 1rem; }
 
+.styles__icon___6tQST {
+  font-size: 2rem; }
+  .styles__icon___6tQST svg {
+    vertical-align: top;
+    float: right; }
+
 @media (min-width: 992px) {
   .styles__wrapper___cu1W7 {
     padding: 2rem; }
     .styles__wrapper___cu1W7 h1 {
-      font-size: 2rem; }
+      font-size: 2.1rem; }
     .styles__wrapper___cu1W7 h3 {
-      font-size: 1.8rem; } }
+      font-size: 1.8rem; }
+  .styles__icon___6tQST {
+    font-size: 2.5rem; } }
 
 .styles__wrapper___1d9NF {
   padding: 2rem 0; }
