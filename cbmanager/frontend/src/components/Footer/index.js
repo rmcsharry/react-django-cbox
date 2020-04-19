@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className={`${styles.footer} bg-dark`}>
       <h5>
-          Just a one page demo
+        React and Django - just a one page demo
       </h5>
     </footer>
   )

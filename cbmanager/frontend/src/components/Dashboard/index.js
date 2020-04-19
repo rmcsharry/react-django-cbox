@@ -16,6 +16,7 @@ export class Dashboard extends Component {
   static propTypes = {
     progress: PropTypes.object.isRequired,
     getProgress: PropTypes.func.isRequired,
+    totalResults: PropTypes.number.isRequired
   }
 
   componentDidMount() {
@@ -46,13 +47,11 @@ const progressSelector = state => state.progressReducer.progress
 const totalResultsSelector = createSelector (
   progressSelector,
   progress => {
-    if (!progress['results']) return 0
-    console.log('results', progress['results'])
-    const total = progress['results'].reduce((acc, result) => {
-      acc + result['total']
-    }, 0)
-    console.log('total', total)
-    return 100
+    if (!progress.results) return 0
+      const total = progress.results.reduce((acc, result) => {
+        return acc + result.total
+      }, 0)
+    return total
   }
 )
 
