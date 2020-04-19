@@ -24,12 +24,24 @@
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "css-loader": "^3.5.2",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
+    "sass-loader": "^8.0.2",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-bootstrap": "^1.0.0",
+    "react-bootstrap-icons": "^1.0.1-alpha3",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   }
 }
