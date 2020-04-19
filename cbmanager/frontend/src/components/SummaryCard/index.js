@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styles from './styles.scss';
 
-function SummaryCard({title, value}) {
+function SummaryCard({title, value, icon}) {
   return (
     <div className={styles.wrapper}>
       <Row>
@@ -15,7 +15,7 @@ function SummaryCard({title, value}) {
         <Col>
           <h3>{title}</h3>
         </Col>
-        <Col>IMG</Col>
+        <Col>{icon}</Col>
       </Row>
     </div>
   );
