@@ -7,13 +7,33 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 
 export class CoursesChooser extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedValue: 0,
+    }
+    this.handleChoice = this.handleChoice.bind(this)
+  }
+
   static propTypes = {
     courses: PropTypes.array.isRequired,
     getCourses: PropTypes.func.isRequired,
+    allOption: PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.number
+    })
   }
 
   componentDidMount() {
     this.props.getCourses()
+    this.setState({
+      selectedValue: this.props.defaultValue,
+    })
+  }
+
+  handleChoice(selectedOption) {
+    this.setState({ selectedValue: selectedOption.target.value })
+    console.log(selectedOption.target.value)
   }
 
   render() {
@@ -34,7 +54,17 @@ export class CoursesChooser extends Component {
                 Courses
               </Form.Label>
               <Col xs={8} md={4}>
-                <Form.Control as='select' size='lg'>
+                <Form.Control
+                  as='select'
+                  size='lg'
+                  value={
+                    this.props.courses.filter(
+                      ({ id }) => id === this.state.selectedValue
+                    ).id
+                  }
+                  onChange={this.handleChoice}
+                >
+                  <option value={this.props.allOption.value}>{this.props.allOption.label}</option>
                   {courseOptions()}
                 </Form.Control>
               </Col>
@@ -50,6 +80,10 @@ const coursesSelector = (state) => state.coursesReducer.courses
 
 const mapStateToProps = (state) => ({
   courses: coursesSelector(state),
+  allOption: {
+    label: "All courses",
+    value: 0
+  }
 })
 
 export default connect(mapStateToProps, { getCourses })(CoursesChooser)
