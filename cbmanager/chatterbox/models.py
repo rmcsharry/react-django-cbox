@@ -71,7 +71,7 @@ class EnrollmentManager(models.Manager.from_queryset(EnrollmentCustomQuerySet)):
       active_lookback = DateTime.today() - TimeDelta(days=45)
       qs = super(EnrollmentManager, self).get_queryset().annotate(
         end_date=ExpressionWrapper(
-            F('enrolled') + TimeDelta(days=182),
+            F('enrolled') + TimeDelta(days=183),
             output_field=models.DateField(),
         ),
         is_current=Case(

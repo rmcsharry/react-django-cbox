@@ -26,7 +26,7 @@ From a virgin db install:
 
 # See db with some test data (students)
 
-`python manage.py import_students` will import student data for organisation 1 (AEKI)
+`python manage.py import_students x` will import student data for organisation 1 (AEKI)
 
 This command will empty all AEKI students first, then repopulate using the `students_AEKI.csv` file as the source data
 
