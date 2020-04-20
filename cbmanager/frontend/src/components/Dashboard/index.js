@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
-import { getProgress } from '../../actions/progress'
+import { doFetchProgress } from '../../actions/progress'
 
 import SummaryCard from '../SummaryCard'
 import { People } from 'react-bootstrap-icons'
@@ -17,12 +17,12 @@ import CoursesChooser from '../CourseChooser'
 export class Dashboard extends Component {
   static propTypes = {
     progress: PropTypes.object.isRequired,
-    getProgress: PropTypes.func.isRequired,
+    fetchProgress: PropTypes.func.isRequired,
     totalResults: PropTypes.number.isRequired,
   }
 
   componentDidMount() {
-    this.props.getProgress()
+    this.props.fetchProgress()
   }
 
   render() {
@@ -71,7 +71,6 @@ export class Dashboard extends Component {
 const progressSelector = (state) => state.progressReducer.progress
 
 const totalResultsSelector = createSelector(progressSelector, (progress) => {
-  if (!progress.results) return 0
   const total = progress.results.reduce((acc, result) => {
     return acc + result.total
   }, 0)
@@ -83,4 +82,9 @@ const mapStateToProps = (state) => ({
   totalResults: totalResultsSelector(state),
 })
 
-export default connect(mapStateToProps, { getProgress })(Dashboard)
+const mapDispatchToProps = {
+  fetchProgress: doFetchProgress
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+

@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-import { GET_PROGRESS } from './types'
+import { PROGRESS_RECEIVED } from './types'
 
-export const getProgress = () => (dispatch) => {
+export const doFetchProgress = () => (dispatch) => {
   axios
     .get('/api/v1/progress/')
     .then((res) => {
       dispatch({
-        type: GET_PROGRESS,
+        type: PROGRESS_RECEIVED,
         payload: res.data,
       })
     })

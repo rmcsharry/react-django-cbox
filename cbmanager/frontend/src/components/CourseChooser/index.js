@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getCourses } from '../../actions/courses'
-
+import { doFetchCourses, doChooseCourse } from '../../actions/courses'
+import { COURSE_CHOSEN } from '../../actions/types'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
+import PieBaker from '../PieBaker'
 
 export class CoursesChooser extends Component {
   constructor(props) {
@@ -17,7 +18,8 @@ export class CoursesChooser extends Component {
 
   static propTypes = {
     courses: PropTypes.array.isRequired,
-    getCourses: PropTypes.func.isRequired,
+    fetchCourses: PropTypes.func.isRequired,
+    chooseCourse: PropTypes.func.isRequired,
     allOption: PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.number
@@ -25,7 +27,7 @@ export class CoursesChooser extends Component {
   }
 
   componentDidMount() {
-    this.props.getCourses()
+    this.props.fetchCourses()
     this.setState({
       selectedValue: this.props.defaultValue,
     })
@@ -33,7 +35,7 @@ export class CoursesChooser extends Component {
 
   handleChoice(selectedOption) {
     this.setState({ selectedValue: selectedOption.target.value })
-    console.log(selectedOption.target.value)
+    this.props.chooseCourse(selectedOption.target.value)
   }
 
   render() {
@@ -71,6 +73,7 @@ export class CoursesChooser extends Component {
             </Form.Row>
           </Form.Group>
         </Form>
+        <PieBaker />
       </div>
     )
   }
@@ -86,4 +89,9 @@ const mapStateToProps = (state) => ({
   }
 })
 
-export default connect(mapStateToProps, { getCourses })(CoursesChooser)
+const mapDispatchToProps = {
+  chooseCourse: doChooseCourse,
+  fetchCourses: doFetchCourses
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesChooser)

@@ -1,3 +1,6 @@
+body {
+  background: #F9F9FC; }
+
 .main__App___3prgX {
   height: 100vh;
   display: flex;
@@ -12,7 +15,7 @@ label {
 
 .styles__footer___dxmuT {
   color: white;
-  height: 3rem;
+  min-height: 4rem;
   display: flex;
   justify-content: center;
   align-items: center; }
@@ -65,4 +68,7 @@ label {
     color: black;
     margin-left: 1rem;
     margin-bottom: 0; }
+
+.styles__pieWrapper___RgV6Z {
+  height: 20rem; }
 
