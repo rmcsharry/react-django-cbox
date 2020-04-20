@@ -1,1 +1,2 @@
 export const GET_PROGRESS = 'GET_PROGRESS'
+export const GET_COURSES = 'GET_COURSES'

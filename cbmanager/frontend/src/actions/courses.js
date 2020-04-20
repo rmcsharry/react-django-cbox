@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-import { GET_PROGRESS } from './types'
+import { GET_COURSES } from './types'
 
-export const getProgress = () => (dispatch) => {
+export const getCourses = () => (dispatch) => {
   axios
-    .get('/api/v1/progress/')
+    .get('/api/v1/organisations/1/courses')
     .then((res) => {
       dispatch({
-        type: GET_PROGRESS,
+        type: GET_COURSES,
         payload: res.data,
       })
     })

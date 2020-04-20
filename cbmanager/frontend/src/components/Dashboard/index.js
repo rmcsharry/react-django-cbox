@@ -12,6 +12,7 @@ import { Book } from 'react-bootstrap-icons'
 import { Award } from 'react-bootstrap-icons'
 import styles from './styles.scss'
 import SectionTitle from '../SectionTitle'
+import CoursesChooser from '../CourseChooser'
 
 export class Dashboard extends Component {
   static propTypes = {
@@ -60,6 +61,7 @@ export class Dashboard extends Component {
           </Col>
         </Row>
         <SectionTitle title={'Progress'} />
+        <CoursesChooser />
         <SectionTitle title={`${this.props.totalResults} student(s)`} />
       </div>
     )

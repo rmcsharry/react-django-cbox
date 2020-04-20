@@ -7,7 +7,7 @@ import DayJS from 'react-dayjs'
 function SectionTitle({ title }) {
   const dayjs = require('dayjs')
   const today = dayjs('2-3-2020').format('MMMM D, YYYY')
-  console.log(today)
+
   return (
     <Row>
       <Col>
